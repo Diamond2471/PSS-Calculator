@@ -783,15 +783,12 @@ const btnOne = document.querySelector("#btnOne"),
   messageOne = document.querySelector("#messageOne"),
   messageTwo = document.querySelector("#messageTwo"),
   textArea = document.querySelector("#textArea");
+let firstCrew = crewOne.value.toLowerCase(),
+  secondCrew = crewTwo.value.toLowerCase();
 
-//listen for submit
-btnOne.addEventListener("click", () => {
-  const firstCrew = crewOne.value.toLowerCase();
-  const secondCrew = crewTwo.value.toLowerCase();
-  /*   console.log(firstCrew);
-  console.log(secondCrew);
-  console.log(Object.values(fiveStars)[0][2][0]);
-  console.log(Object.values(fiveStars)[0][2][1]); */
+const checksForFive = () => {
+  firstCrew = crewOne.value.toLowerCase();
+  secondCrew = crewTwo.value.toLowerCase();
   let keyStar = "";
   for (let i = 0; i < dbLength; i++) {
     keyStar = Object.values(fiveStars)[i];
@@ -806,9 +803,27 @@ btnOne.addEventListener("click", () => {
       }
     }
   }
+};
+
+//listen for prestige
+btnOne.addEventListener("click", () => {
+  checksForFive();
 });
 
-btnTwo.addEventListener("click", () => {
+crewOne.addEventListener("keyup", e => {
+  if (e.keyCode == 13) {
+    checksForFive();
+  }
+});
+
+crewTwo.addEventListener("keyup", e => {
+  if (e.keyCode == 13) {
+    checksForFive();
+  }
+});
+
+//export data as JSON
+/* btnTwo.addEventListener("click", () => {
   const array = textArea.value.split(/\r?\n/);
   let fiveStarName = [];
   const twoCrews = [];
@@ -837,7 +852,7 @@ btnTwo.addEventListener("click", () => {
     }
   }
 
-  //const fiveStars = { catdog: ["cat", "dog"], batman: ["bat", "man"] };
   messageTwo.innerHTML = ` ${fiveStarName}: ${JSON.stringify(twoCrews)}`;
   console.log(messageTwo.innerHTML);
 });
+ */
